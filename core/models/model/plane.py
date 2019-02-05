@@ -1,4 +1,3 @@
-
 class Plane():
 
 	def __init__(model, total_seats, available_seats):
