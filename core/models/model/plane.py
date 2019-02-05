@@ -18,3 +18,4 @@ class Plane():
 
 	def book_seat(*args, **kwargs):
 		''''''
+

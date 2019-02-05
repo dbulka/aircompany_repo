@@ -21,9 +21,10 @@ class Flight():
 	def define_plane(*args, **kwargs):
 		'''define plane for flight'''
 
-	def get_two_way_ticket(*args):
+		def get_two_way_ticket(*args):
 		'''use method if two way ticket was choosen'''
 
 	def available_tickets_on_date(*args, **kwargs):
 		'''returns shedule'''
+
 
