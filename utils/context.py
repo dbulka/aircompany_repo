@@ -26,4 +26,4 @@ class Parameter(Enum):
     DB_USERNAME = 'dbuser'
     DB_PASSWORD = 'dbpassword'
     DB_HOST = 'dbhost'
-    DB_PORT = 'dbport'
+    DB_NAME = 'dbname'

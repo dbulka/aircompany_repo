@@ -1,1 +1,2 @@
-depencies, just depencies
+mysql-connector
+mysql-connector-python
