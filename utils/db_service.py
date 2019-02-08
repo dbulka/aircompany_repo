@@ -47,11 +47,12 @@ class MySQLConnector(DBConnector):
         """
         try:
             # auth_plugin is needed for mysql8+
-            self.connection = mysql.connector.connect(host=Context.get_db_parameter(Parameter.DB_HOST),
-                                                      database=Context.get_db_parameter(Parameter.DB_NAME),
-                                                      username=Context.get_db_parameter(Parameter.DB_USERNAME),
-                                                      password=Context.get_db_parameter(Parameter.DB_PASSWORD),
+            self.connection = mysql.connector.connect(host=Context.get(Parameter.DB_HOST),
+                                                      database=Context.get(Parameter.DB_NAME),
+                                                      user=Context.get(Parameter.DB_USERNAME),
+                                                      password=Context.get(Parameter.DB_PASSWORD),
                                                       auth_plugin='mysql_native_password')
+            self.connection.autocommit = True
             if self.connection.is_connected():
                 db_Info = self.connection.get_server_info()
                 logging.getLogger(__name__).debug("Connected to MySQL database... MySQL Server version on %s" % db_Info)
@@ -77,15 +78,14 @@ class MySQLConnector(DBConnector):
         :param query: str object like sql query
         :return: results of query as typle or none if we got exception
         """
-        result = None
         try:
             self.cursor.execute(query)
             logging.getLogger(__name__).debug("Query was execute.")
-            result = self.cursor.fetchall()
         except Error as e:
             logging.getLogger(__name__).error("Error while executing query. %s" % e)
-        finally:
-            return result
+
+    def get_results(self):
+        return self.cursor.fetchall()
 
     def shutdown(self):
         """
