@@ -15,3 +15,4 @@ class Plane(object):
     def __str__(self):
         return 'Manufacturer: {0}; Model: {1}; Capacity: {2}; Speed: {3}'.format(self.manufacturer, self.model,
                                                                                  self.capacity, self.speed)
+
