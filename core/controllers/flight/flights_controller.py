@@ -22,13 +22,13 @@ class FlightsController(object):
         :param date_arrival: day of arrival
         :return: responce of mysql databases
         """
-        MySQLConnector.INSTANCE.execute_query('use __aircompany;')
+        MySQLConnector.INSTANCE.execute_query('use aircompany;')
         MySQLConnector.INSTANCE.execute_query('INSERT INTO flights(id_plane, _from, _to, date_departure, date_arrival) '
                                               'VALUES ({0}, {1}, {2}, {3}, {4});'
                                               .format(id_plane, _from, _to, date_departure, date_arrival))
 
 
-    def select(self):
+    def read(self):
         """
         select info from 'flights' table
         :return: selected info

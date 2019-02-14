@@ -22,12 +22,12 @@ class PlanesController(object):
         :param vip_seats_num: number of vip seats
         :return: responce of mysql databases
         """
-        MySQLConnector.INSTANCE.execute_query('use __aircompany;')
+        MySQLConnector.INSTANCE.execute_query('use aircompany;')
         MySQLConnector.INSTANCE.execute_query('INSERT INTO planes(manufacturer, model, econom_seats_num, biz_seats_num, '
                                               'vip_seats_num) VALUES ({0},{1},{2},{3},{4});'
                                               .format(manufacturer, model, econom_seats_num, biz_seats_num, vip_seats_num))
 
-    def select(self):
+    def read(self):
         """
         select info from 'planes' table
         :return: selected info
