@@ -1,8 +1,8 @@
+import os
 import configparser
-from os import getcwd
 from enum import Enum
 
-CONFIG_FILE_PATH = 'C:\\Users\\bulka\\aircompany_repo\\aircompany.ini'
+CONFIG_FILE_PATH = os.path.join(os.getcwd(), 'aircompany.ini')
 
 
 class Context:
