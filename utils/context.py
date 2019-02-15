@@ -2,12 +2,13 @@ import os
 import configparser
 from enum import Enum
 
-CONFIG_FILE_PATH = os.path.join(os.getcwd(), 'aircompany.ini')
+# CONFIG_FILE_PATH = os.path.join(os.getcwd(), 'aircompany.ini')
+CONFIG_FILE_PATH = r'/Users/akratovich/projects/python/aircompany_repo/tests/aircompany.ini'
 
 
 class Context:
     """
-    Cotains parser methods of config from a different number of sections of CONFIG_FILE_PATH
+    Contains parser methods of config from a different number of sections of CONFIG_FILE_PATH
     """
     @classmethod
     def get(cls, parameter):

@@ -1,31 +1,36 @@
-from core.models.models import Plane, Airport
+from core.controllers.planes.planes_controller import PlanesController
+from core.models.planes.plane import Plane
 from utils.reader import read_txt
 from utils.writer import write_2_json
 
 
 def planes_2_json():
-    planes = read_txt('resources/ACFTREF.txt')
+    planes = read_txt('/Users/akratovich/projects/python/aircompany_repo/resources/planes_sample.txt')
     planes_list = []
     for line in planes:
         if line:
-            parts = line.replace('\"', '').split(',')
-            planes_list.append(Plane(parts[1].strip(), parts[2].strip(), parts[8].strip(), parts[10].strip()).__dict__)
+            planes_list.append(parse_line_from_planes_source(line).__dict__)
     write_2_json(planes_list, 'resources/planes.json')
 
 
-def airports_2_json():
-    airports = read_txt('resources/airports.csv')
-    airports_list = []
+def parse_line_from_planes_source(line):
+    parts = line.replace('\"', '').split(',')
+    manufacturer = parts[1].strip()
+    model = parts[2].strip()
+    capacity = parts[8].strip()
+    speed = parts[10].strip()
+    return Plane(manufacturer, model, capacity, speed)
 
-    for line in airports:
+
+def planes_2_db():
+    planes = read_txt('/Users/akratovich/projects/python/aircompany_repo/resources/ACFTREF.txt')
+    plane_ctrl = PlanesController()
+    for line in planes:
         if line:
-            parts = line.replace('\"', '').split(',')
-            airport = Airport(parts[3].strip(), parts[2].strip(), parts[8].strip(), parts[9].strip(), parts[10].strip())
-            airports_list.append(airport.__dict__)
-    write_2_json(airports_list, 'resources/airports.json')
+            plane = parse_line_from_planes_source(line)
+            plane_ctrl.create(plane)
 
 
+planes_2_db()
 # write_2_json()
 # planes_2_json()
-
-#push

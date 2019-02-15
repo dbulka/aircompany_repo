@@ -1,4 +1,7 @@
 from utils.db_service import MySQLConnector
+from utils.context import Context, Parameter
+import configparser
+from enum import Enum
 
 class TicketTypesController(object):
     """
@@ -19,7 +22,7 @@ class TicketTypesController(object):
         :return: responce from mysql databases
         """
 
-        MySQLConnector.INSTANCE.execute_query('use aircompany;')
+        MySQLConnector.INSTANCE.execute_query('use {0};'.format(Context.get(Parameter.DB_NAME)))
         MySQLConnector.INSTANCE.execute_query('INSERT INTO ticket_types(title) value ({0});'.format(title))
 
     def read(self):
