@@ -49,10 +49,6 @@ class PlanesController(object):
                                               "biz_seats_num = {2}, vip_seats_num = {3} WHERE id = {4};".format(
             model, econom_seats_num, biz_seats_num, vip_seats_num, id))
 
-    #     1. окно выбора параметров для изменения: через for/in root выбирает какие параметры хочет изменить
-    #     2. окно выбора параметра-условия измения: через через for/in root задаёт параметр-условие
-    #     3. задаём значения для параметров п1. п2.
-
     def delete(self, id):
         """
         delete info from 'planes' table, info:

@@ -20,7 +20,7 @@ class FlightsController(object):
         :param _to: point of arrival
         :param date_departure: day of departure
         :param date_arrival: day of arrival
-        :return: responce of mysql databases
+        :return: responce from mysql databases
         """
         MySQLConnector.INSTANCE.execute_query('use aircompany;')
         MySQLConnector.INSTANCE.execute_query('INSERT INTO flights(id_plane, _from, _to, date_departure, date_arrival) '
