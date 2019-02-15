@@ -1,11 +1,12 @@
 from core.controllers.planes.planes_controller import PlanesController
 from core.models.planes.plane import Plane
+from utils.context import Context, Parameter
 from utils.reader import read_txt
 from utils.writer import write_2_json
 
 
 def planes_2_json():
-    planes = read_txt('/Users/akratovich/projects/python/aircompany_repo/resources/planes_sample.txt')
+    planes = read_txt('{0}/planes_sample.txt'.format(Context.get(Parameter.BASE_RESOURCE_PATH)))
     planes_list = []
     for line in planes:
         if line:
@@ -23,7 +24,7 @@ def parse_line_from_planes_source(line):
 
 
 def planes_2_db():
-    planes = read_txt('/Users/akratovich/projects/python/aircompany_repo/resources/ACFTREF.txt')
+    planes = read_txt('{0}/ACFTREF.txt'.format(Context.get(Parameter.BASE_RESOURCE_PATH)))
     plane_ctrl = PlanesController()
     for line in planes:
         if line:
