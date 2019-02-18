@@ -1,4 +1,6 @@
+from utils.context import Context, Parameter
 from utils.db_service import MySQLConnector
+
 
 class PlanesController(object):
     """
@@ -12,20 +14,18 @@ class PlanesController(object):
         MySQLConnector().connect()
         self.cursor = MySQLConnector.INSTANCE.get_cursor()
 
-    def create(self, manufacturer, model, econom_seats_num, biz_seats_num, vip_seats_num):
+    @staticmethod
+    def create(plane):
         """
-        create new row in 'plane' table with info:
-        :param manufacturer: manufacturer's name
-        :param model: model's type
-        :param econom_seats_num: number of econom seats
-        :param biz_seats_num: number of biz. seats
-        :param vip_seats_num: number of vip seats
-        :return: responce of mysql databases
+        create new row in 'planes' table
         """
-        MySQLConnector.INSTANCE.execute_query('use aircompany;')
-        MySQLConnector.INSTANCE.execute_query('INSERT INTO planes(manufacturer, model, econom_seats_num, biz_seats_num, '
-                                              'vip_seats_num) VALUES ({0},{1},{2},{3},{4});'
-                                              .format(manufacturer, model, econom_seats_num, biz_seats_num, vip_seats_num))
+        query = "INSERT INTO planes(manufacturer, model, econom_seats_num, biz_seats_num, vip_seats_num) " \
+                "VALUES (\"\'{0}\'\",\"\'{1}\'\",\"{2}\",\"{3}\",\"{4}\");".format(
+            plane.manufacturer, plane.model, plane.econom_seats_num, plane.business_seats_num,
+            plane.vip_seats_num)
+        print(query)
+        MySQLConnector.INSTANCE.execute_query('use {0};'.format(Context.get(Parameter.DB_NAME)))
+        MySQLConnector.INSTANCE.execute_query(query)
 
     def read(self):
         """

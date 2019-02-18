@@ -1,5 +1,5 @@
-import os
 import configparser
+import os
 from enum import Enum
 
 CONFIG_FILE_PATH = os.path.join(os.getcwd(), 'aircompany.ini')
@@ -7,8 +7,9 @@ CONFIG_FILE_PATH = os.path.join(os.getcwd(), 'aircompany.ini')
 
 class Context:
     """
-    Cotains parser methods of config from a different number of sections of CONFIG_FILE_PATH
+    Contains parser methods of config from a different number of sections of CONFIG_FILE_PATH
     """
+
     @classmethod
     def get(cls, parameter):
         """
@@ -26,3 +27,4 @@ class Parameter(Enum):
     DB_PASSWORD = 'dbpassword'
     DB_HOST = 'dbhost'
     DB_NAME = 'dbname'
+    BASE_RESOURCE_PATH = 'base_resorce_path'
