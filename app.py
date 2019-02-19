@@ -19,6 +19,7 @@ def delete():
     flight.delete(3)
     return "deleted"
 
+
 if __name__ == "__main__":
     app.run()
 
