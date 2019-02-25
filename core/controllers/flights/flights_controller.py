@@ -1,4 +1,6 @@
 from utils.db_service import MySQLConnector
+from utils import Context, Parameter
+import mysql.connector
 
 class FlightsController(object):
     """
@@ -11,6 +13,7 @@ class FlightsController(object):
         """
         MySQLConnector().connect()
         self.cursor = MySQLConnector.INSTANCE.get_cursor()
+        MySQLConnector.INSTANCE.execute_query('use {0};'.format(Context.get(Parameter.DB_NAME)))
 
     def create(self, id_plane, _from, _to, date_departure, date_arrival):
         """
@@ -22,11 +25,10 @@ class FlightsController(object):
         :param date_arrival: day of arrival
         :return: responce from mysql databases
         """
-        MySQLConnector.INSTANCE.execute_query('use aircompany;')
+
         MySQLConnector.INSTANCE.execute_query('INSERT INTO flights(id_plane, _from, _to, date_departure, date_arrival) '
                                               'VALUES ({0}, {1}, {2}, {3}, {4});'
                                               .format(id_plane, _from, _to, date_departure, date_arrival))
-
 
     def read(self):
         """
