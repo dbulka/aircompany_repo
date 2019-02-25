@@ -32,7 +32,7 @@ def post(id_plane, _from, _to, date_departure, date_arrival):
     return 'flight was created'
 
 @app.route('api/flights/<id int>', method = 'PUT')
-def put(id):
+def put(_to, id_plane):
     flights.update(_to, id_plane)
     return 'flight was edited'
 
@@ -44,7 +44,7 @@ def get_all_users():
 @app.route('api/users/<id int>', method = 'GET')
 def get_user_by_id(id):
     read_user_by_id = users.read_by_id()
-    print str(read_user_by_id)
+    return str(read_user_by_id)
 
 @app.route('api/users/<id int>', method = 'DELETE')
 def delete_user_by_id(id):
@@ -57,8 +57,8 @@ def post():
     return 'user was posted'
 
 @app.route('api/users/<id int>', method = 'PUT')
-def put(id):
-    users.update(email, phone, id):
+def put(email, phone, id):
+    users.update(email, phone, id)
     return 'users was updated'
 
 
